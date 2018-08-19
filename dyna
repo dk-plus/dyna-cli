@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+require('shelljs/global');
+
+let argv = require('yargs')
+  .command('init', '初始化项目', (yargs) => {
+    let argv = yargs.option('n', {
+      alias: 'name',
+      describe: '项目名称',
+      demandOption: true
+    })
+    .argv;
+
+    exec(`git clone https://github.com/dk-plus/dyna-cli.git`);
+    exec(`rename dyna-cli ${argv.name}`);
+  })
+  .usage('Usage: dyna [options]')
+  .example('dyna init --name "project-name"')
+  .help('h')
+  .alias('h', 'help')
+  .alias('v', 'version')
+  .argv
