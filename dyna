@@ -3,15 +3,16 @@ require('shelljs/global');
 
 let argv = require('yargs')
   .command('init', '初始化项目', (yargs) => {
+    const Init = require('./lib/init.js');
+    Init.init();
+  })
+  .command('add', '新增组件', (yargs) => {
     let argv = yargs.option('n', {
       alias: 'name',
-      describe: '项目名称',
+      describe: '组件名称',
       demandOption: true
     })
     .argv;
-
-    exec(`git clone https://github.com/dk-plus/dyna-cli.git`);
-    exec(`rename dyna-cli ${argv.name}`);
   })
   .usage('Usage: dyna [options]')
   .example('dyna init --name "project-name"')
